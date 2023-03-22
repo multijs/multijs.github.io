@@ -367,5 +367,5 @@ function getRandomSafeSpot() {
       
       clearInterval(admininterval)
     }
-  }, 100);
+  }, 2000);
 })();
