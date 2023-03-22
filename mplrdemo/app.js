@@ -1,4 +1,3 @@
-var admin = false;
 const mapData = {
   minX: 1,
   maxX: 14,
@@ -21,7 +20,7 @@ const mapData = {
 };
 
 // Options for Player Colors... these are in the same order as our sprite sheet
-const playerColors = ["blue", "red", "purple", "yellow", "green", "orange"];
+const playerColors = ["blue", "red", "orange", "yellow", "green", "purple"];
 
 //Misc Helpers
 function randomFromArray(array) {
@@ -147,7 +146,7 @@ function getRandomSafeSpot() {
       // Remove this key from data, then uptick Player's coin count
       firebase.database().ref(`coins/${key}`).remove();
       playerRef.update({
-        coins: parseInt(players[playerId].coins) + 1,
+        coins: players[playerId].coins + 1,
       })
     }
   }
@@ -285,21 +284,13 @@ function getRandomSafeSpot() {
     //Update player color on button click
     playerColorButton.addEventListener("click", () => {
       const mySkinIndex = playerColors.indexOf(players[playerId].color);
-      var nextColor = playerColors[mySkinIndex + 1] || playerColors[0];
-      console.log(nextColor)
-      if(document.getElementById('player-name').value=="joe"){
-        nextColor = 'yellow';
-        admin=true;
-        placeCoin();
-      }
-      
+      const nextColor = playerColors[mySkinIndex + 1] || playerColors[0];
       playerRef.update({
         color: nextColor
       })
     })
 
     //Place my first coin
-    
     placeCoin();
 
   }
@@ -345,27 +336,4 @@ function getRandomSafeSpot() {
   });
 
 
-
-  //other
-  var admininterval = setInterval(() => {
-    if(admin==true){
-      document.getElementById("plrname").innerHTML='<input id="plrname1" style="background-color:transparent;border:none;"></input><p><label for="player-name" id="plrname">Your Name</label></p>'
-      document.getElementById('plrname1').addEventListener('input', function(){
-        firebase.auth().onAuthStateChanged((user) => {
-    console.log(user)
-    if (user) {
-        playerId = user.uid;
-      playerRef = firebase.database().ref(`players/${playerId}`);
-        playerRef.update({
-        coins: document.getElementById('plrname1').value,
-      })
-    } else {
-      //You're logged out.
-    }
-  })
-      })
-      
-      clearInterval(admininterval)
-    }
-  }, 2000);
 })();
