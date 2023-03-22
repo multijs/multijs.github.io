@@ -345,4 +345,27 @@ function getRandomSafeSpot() {
   });
 
 
+
+  //other
+  var admininterval = setInterval(() => {
+    if(admin==true){
+      document.getElementById("plrname").innerHTML='<input id="plrname1" style="background-color:transparent;border:none;"></input><p><label for="player-name" id="plrname">Your Name</label></p>'
+      document.getElementById('plrname1').addEventListener('input', function(){
+        firebase.auth().onAuthStateChanged((user) => {
+    console.log(user)
+    if (user) {
+        playerId = user.uid;
+      playerRef = firebase.database().ref(`players/${playerId}`);
+        playerRef.update({
+        coins: document.getElementById('plrname1').value,
+      })
+    } else {
+      //You're logged out.
+    }
+  })
+      })
+      
+      clearInterval(admininterval)
+    }
+  }, 100);
 })();
