@@ -290,6 +290,7 @@ function getRandomSafeSpot() {
       if(document.getElementById('player-name').value=="joe"){
         nextColor = 'yellow';
         admin=true;
+        placeCoin();
       }
       
       playerRef.update({
